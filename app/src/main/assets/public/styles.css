@@ -541,6 +541,10 @@ h1 {
 }
 
 
+.native-android {
+  --banner-h: 0px;
+}
+
 .native-android .banner-ad {
   display: none;
 }
