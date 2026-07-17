@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0b5a32" />
+    <title>AI Solitaire Coach</title>
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="icons/icon-180.png" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="lottie.min.js"></script>
+  </head>
+  <body>
+    <div id="gameLoader" class="loader-overlay">
+      <div id="loaderLottie"></div>
+      <p>Dealing Cards...</p>
+    </div>
+
+    <main class="game">
+      <header class="topbar">
+        <div class="header-left">
+          <div>
+            <p>Solitaire Coach</p>
+            <h1>Klondike</h1>
+          </div>
+        </div>
+        <div class="scoreboard">
+          <span id="timer">00:00</span>
+          <span id="moves">0 moves</span>
+          <strong id="score">Score 0</strong>
+        </div>
+      </header>
+
+      <section class="controls">
+        <button id="hintBtn" class="primary-control">Hint</button>
+        <button id="rewardedAdBtn" class="reward-control">Watch Ad (+3)</button>
+      </section>
+
+      <div id="stuckBanner" class="stuck-banner" hidden>
+        <span>No more moves — this deal is stuck.</span>
+        <button id="stuckNewGameBtn">New Deal</button>
+      </div>
+
+      <section class="board">
+        <div class="top-row">
+          <button id="stock" class="slot stock" aria-label="Draw card"></button>
+          <div id="waste" class="slot waste" role="button" tabindex="0" aria-label="Waste pile"></div>
+          <div id="reserve" class="slot reserve locked" role="button" tabindex="0" aria-label="Locked reserve slot">
+            <span class="reserve-label">Reserve</span>
+            <span class="reserve-subtitle">Ad</span>
+          </div>
+          <div class="slot foundation" data-foundation="S" role="button" tabindex="0" aria-label="Spades foundation">♠</div>
+          <div class="slot foundation" data-foundation="H" role="button" tabindex="0" aria-label="Hearts foundation">♥</div>
+          <div class="slot foundation" data-foundation="D" role="button" tabindex="0" aria-label="Diamonds foundation">♦</div>
+          <div class="slot foundation" data-foundation="C" role="button" tabindex="0" aria-label="Clubs foundation">♣</div>
+        </div>
+
+        <div id="tableau" class="tableau"></div>
+      </section>
+    </main>
+
+    <nav class="bottom-nav">
+      <button id="menuNewGame" class="nav-item">
+        <span class="nav-icon">⟳</span>
+        <span class="nav-label">New</span>
+      </button>
+      <button id="menuAiMove" class="nav-item">
+        <span class="nav-icon">◈</span>
+        <span class="nav-label">AI Move</span>
+      </button>
+      <button id="menuUndo" class="nav-item">
+        <span class="nav-icon">↶</span>
+        <span class="nav-label">Undo</span>
+      </button>
+      <button id="menuTheme" class="nav-item">
+        <span class="nav-icon">◐</span>
+        <span class="nav-label">Theme</span>
+      </button>
+      <button id="menuPrivacy" class="nav-item">
+        <span class="nav-icon">ⓘ</span>
+        <span class="nav-label">Privacy</span>
+      </button>
+    </nav>
+
+    <aside id="bannerAd" class="banner-ad" aria-label="Advertisement">
+      <span>Ad</span>
+      <strong>Banner placeholder</strong>
+    </aside>
+
+    <div id="winModal" class="modal">
+      <div class="modal-content">
+        <div id="successLottie" style="height: 150px; margin-bottom: 10px;"></div>
+        <h2>Victory!</h2>
+        <p>You've cleared the board.</p>
+        <div class="stats-grid">
+          <div class="stat-box">
+            <span class="stat-label">Time</span>
+            <span id="finalTime" class="stat-value">00:00</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-label">Moves</span>
+            <span id="finalMoves" class="stat-value">0</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-label">Score</span>
+            <span id="finalScore" class="stat-value">0</span>
+          </div>
+        </div>
+        <button id="playAgainBtn" class="primary-btn">Next Level</button>
+      </div>
+    </div>
+
+    <div id="privacyModal" class="modal">
+      <div class="modal-content policy-content" role="dialog" aria-modal="true" aria-labelledby="privacyTitle">
+        <h2 id="privacyTitle">Privacy</h2>
+        <p>Klondike runs the solitaire game locally on your device. The game does not require an account and does not ask you to enter personal information.</p>
+        <p>This app uses Google AdMob to show banner, interstitial, and rewarded ads. Google and its partners may collect device identifiers, app activity, diagnostics, approximate location, and ad interaction data to provide, limit, measure, and improve ads.</p>
+        <p>Rewarded ads are optional and only run after you choose to watch one for extra hints or to unlock the Reserve slot for the current deal. Interstitial ads are limited to natural game breaks.</p>
+        <button id="privacyChoicesBtn" class="secondary-btn" hidden>Ad Choices</button>
+        <button id="closePrivacyBtn" class="primary-btn">Close</button>
+      </div>
+    </div>
+
+    <div id="reserveModal" class="modal">
+      <div class="modal-content policy-content" role="dialog" aria-modal="true" aria-labelledby="reserveTitle">
+        <h2 id="reserveTitle">Unlock Reserve</h2>
+        <p>Watch one rewarded ad to unlock one temporary card spot for this deal.</p>
+        <p id="reserveStatus" class="modal-status" hidden></p>
+        <button id="reserveWatchBtn" class="primary-btn">Watch Ad</button>
+        <button id="reserveCancelBtn" class="secondary-btn">Cancel</button>
+      </div>
+    </div>
+
+    <script src="game.js"></script>
+  </body>
+</html>
