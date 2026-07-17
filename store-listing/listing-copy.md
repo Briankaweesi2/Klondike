@@ -1,4 +1,4 @@
-# Play Store Listing — Solitaire Coach: Klondike (com.vimbah.klondike)
+# Play Store Listing — Solitaire Coach: Klondike (com.edgehog.klondike)
 
 ## Publisher / Developer account
 Publish under: **EdgeHog**

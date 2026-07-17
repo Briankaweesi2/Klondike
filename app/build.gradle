@@ -7,11 +7,11 @@ if (keystorePropertiesFile.exists()) {
 }
 
 android {
-    namespace 'com.vimbah.klondike'
+    namespace 'com.edgehog.klondike'
     compileSdk 36
 
     defaultConfig {
-        applicationId 'com.vimbah.klondike'
+        applicationId 'com.edgehog.klondike'
         minSdk 23
         targetSdk 36
         versionCode 1

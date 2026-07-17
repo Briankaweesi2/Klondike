@@ -8,7 +8,7 @@ Open `index.html` directly in a browser.
 ## Android wrapper
 Open this folder in Android Studio or build with Gradle once Gradle is installed.
 
-- Package: `com.vimbah.klondike`
+- Package: `com.edgehog.klondike`
 - AdMob App ID: `ca-app-pub-3003465306319489~7604915048`
 - Rewarded: `ca-app-pub-3003465306319489/9245299778`
 - Interstitial: `ca-app-pub-3003465306319489/3282526655`

@@ -2,6 +2,6 @@
     @android.webkit.JavascriptInterface <methods>;
 }
 
--keep class com.vimbah.klondike.MainActivity$AndroidAdsBridge {
+-keep class com.edgehog.klondike.MainActivity$AndroidAdsBridge {
     *;
 }

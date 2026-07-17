@@ -1,4 +1,4 @@
-package com.vimbah.klondike;
+package com.edgehog.klondike;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -460,23 +460,34 @@ public class MainActivity extends ComponentActivity {
             return;
         }
 
-        bannerAdView = new AdView(this);
-        bannerAdView.setAdUnitId(currentBannerUnitId());
         int availableWidthPx = rootLayout.getWidth() - systemInsetLeftPx - systemInsetRightPx;
         float density = getResources().getDisplayMetrics().density;
         int widthDp = Math.max(320, Math.round(availableWidthPx / density));
-        bannerAdView.setAdSize(AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(this, widthDp));
-        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+
+        AdSize bannerSize = AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(this, widthDp);
+        bannerHeightPx = bannerSize.getHeightInPixels(this);
+
+        bannerAdView = new AdView(this);
+        bannerAdView.setAdUnitId(currentBannerUnitId());
+        bannerAdView.setAdSize(bannerSize);
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, bannerHeightPx);
         params.gravity = Gravity.BOTTOM;
         rootLayout.addView(bannerAdView, params);
         applySafeAreaMargins();
-        
-        // Push the WebView up so it's not hidden behind the banner
+
         bannerAdView.setAdListener(new AdListener() {
             @Override
             public void onAdLoaded() {
                 mainHandler.post(() -> {
-                    bannerHeightPx = bannerAdView.getAdSize().getHeightInPixels(MainActivity.this);
+                    int loadedHeightPx = Math.max(1, bannerAdView.getAdSize().getHeightInPixels(MainActivity.this));
+                    if (bannerHeightPx != loadedHeightPx) {
+                        bannerHeightPx = loadedHeightPx;
+                        ViewGroup.LayoutParams viewParams = bannerAdView.getLayoutParams();
+                        if (viewParams instanceof FrameLayout.LayoutParams) {
+                            ((FrameLayout.LayoutParams) viewParams).height = bannerHeightPx;
+                            bannerAdView.setLayoutParams(viewParams);
+                        }
+                    }
                     applySafeAreaMargins();
                     callJs("document.body.classList.add('native-banner-loaded')");
                 });
