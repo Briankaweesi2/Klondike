@@ -1,5 +1,10 @@
 # Play Store Listing — Solitaire Coach: Klondike (com.vimbah.klondike)
 
+## Publisher / Developer account
+Publish under: **EdgeHog**
+
+This is the Play Console developer/account name, separate from the app title. Set it once under Play Console → Account details (or when creating the developer account if not done yet) — it's not something set per-listing.
+
 ## App title (max 30 characters) — pick one
 - **Solitaire Coach: Klondike** (25 chars) — recommended, matches app name/package
 - Klondike Solitaire Coach (24 chars)
