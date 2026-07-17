@@ -41,9 +41,9 @@ klondike solitaire, classic solitaire, solitaire card game, free solitaire, soli
 ---
 
 ## Privacy policy URL
-Published at: https://claude.ai/code/artifact/e120b97d-a41f-4a1f-8b9e-bc0e84cc99cb
+https://klondike-alpha.vercel.app/privacy.html
 
-**Before pasting this into Play Console:** open the artifact and use its share menu to make it public — artifacts are private by default, and Google's reviewers must be able to load the URL without a claude.ai login. Use the same URL in Play Console's "Privacy policy" field and in the app's own in-app link if you want them to match.
+Hosted directly from `privacy.html` in this repo (deployed via the Vercel/GitHub integration) — publicly reachable with no sharing step needed. Use this URL in Play Console's "Privacy policy" field.
 
 ---
 
